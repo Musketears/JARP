@@ -27,3 +27,6 @@ class PlaylistCommand(commands.Cog, MusicPlayer):
                 await ctx.send(f"No results found for '{query}'.")
         except Exception as e:
             await ctx.send(f"An error occurred while playing '{query}': {e}")
+
+async def setup(bot: commands.Bot):
+    await bot.add_cog(PlaylistCommand(bot))

@@ -23,3 +23,6 @@ class LeaveCommand(commands.Cog):
             await self.music_player.remove_files([self.music_player.current_file])
         else:
             await ctx.send("The bot is not connected to a voice channel.")
+
+async def setup(bot: commands.Bot):
+    await bot.add_cog(LeaveCommand(bot))

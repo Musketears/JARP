@@ -17,5 +17,5 @@ class ShuffleCommand(commands.Cog):
         else:
             await ctx.send("The queue is empty; nothing to shuffle.")
 
-def setup(bot):
-    bot.add_cog(ShuffleCommand(bot))
+async def setup(bot: commands.Bot):
+    await bot.add_cog(ShuffleCommand(bot))

@@ -16,3 +16,6 @@ class QueueCommand(commands.Cog):
             await ctx.send(f"Current Queue:\n{queue_list}")
         else:
             await ctx.send("The queue is empty.")
+            
+async def setup(bot: commands.Bot):
+    await bot.add_cog(QueueCommand(bot))

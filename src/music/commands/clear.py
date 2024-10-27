@@ -15,5 +15,5 @@ class ClearCommand(commands.Cog):
         else:
             await ctx.send("The queue is already empty.")
 
-def setup(bot):
-    bot.add_cog(ClearCommand(bot))
+async def setup(bot: commands.Bot):
+    await bot.add_cog(ClearCommand(bot))

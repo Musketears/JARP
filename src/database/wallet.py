@@ -1,4 +1,4 @@
-from database import SingletonDatabase
+from .database import SingletonDatabase
 
 class Wallet():
     
@@ -8,26 +8,25 @@ class Wallet():
         FROM wallet
         WHERE user_id = ?
         '''
-        cursor = SingletonDatabase().get_cursor()
-        cursor.execute(query, (user_id,))
-        result = cursor.fetchone()
+        amount = SingletonDatabase().fetch(query, (user_id,))
         
-        print(f"Query result for user_id '{user_id}': {result}")
-        
-        return result
-    
-    def add(self, user_id: str, amount: int) -> None:
-        original_balance = self.get(user_id)
-        if original_balance is None:
+        if amount:
+            return amount[0]
+        else:
             query = '''
             INSERT INTO wallet VALUES (?, ?)
             '''
-            original_balance = 100
-        else:
-            query = '''
-            UPDATE wallet
-            SET balance = ?
-            WHERE user_id = ?
-            '''
-        SingletonDatabase().get_cursor().execute(query, (original_balance + amount, user_id))
-        SingletonDatabase().get_connection().commit()
+            SingletonDatabase().commit(query, (user_id, 100))
+            return 100
+            
+    
+    def add(self, user_id: str, amount: int) -> int:
+        original_balance = self.get(user_id)
+        query = '''
+        UPDATE wallet
+        SET balance = ?
+        WHERE user_id = ?
+        '''
+        SingletonDatabase().commit(query, (original_balance + amount, user_id))
+        
+        return original_balance + amount

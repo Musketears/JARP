@@ -17,3 +17,6 @@ class SkipCommand(commands.Cog):
             voice_client.stop()
         else:
             await ctx.send("The bot is not playing anything at the moment.")
+
+async def setup(bot: commands.Bot):
+    await bot.add_cog(SkipCommand(bot))

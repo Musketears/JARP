@@ -15,3 +15,6 @@ class PauseCommand(commands.Cog):
             voice_client.pause()
         else:
             await ctx.send("The bot is not playing anything at the moment.")
+
+async def setup(bot: commands.Bot):
+    await bot.add_cog(PauseCommand(bot))

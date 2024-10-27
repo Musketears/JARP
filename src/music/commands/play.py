@@ -22,3 +22,5 @@ class PlayCommand(commands.Cog, MusicPlayer):
         except Exception as e:
             await ctx.send(f"An error occurred: {e}")
 
+async def setup(bot: commands.Bot):
+    await bot.add_cog(PlayCommand(bot))

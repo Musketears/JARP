@@ -15,5 +15,5 @@ class JoinCommand(commands.Cog):
         channel = ctx.author.voice.channel
         await channel.connect()
 
-def setup(bot: commands.Bot):
-    bot.add_cog(JoinCommand(bot))
+async def setup(bot: commands.Bot):
+    await bot.add_cog(JoinCommand(bot))
