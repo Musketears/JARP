@@ -1,0 +1,21 @@
+FROM ubuntu:24.04
+
+RUN apt-get update && \
+apt-get install -y --no-install-recommends wget apt-transport-https ca-certificates && \
+    apt-get install -y --no-install-recommends wget apt-transport-https ca-certificates && \ 
+    wget -qO /etc/apt/trusted.gpg.d/nordvpn_public.asc https://repo.nordvpn.com/gpg/nordvpn_public.asc && \
+    echo "deb https://repo.nordvpn.com/deb/nordvpn/debian stable main" > /etc/apt/sources.list.d/nordvpn.list && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends nordvpn && \
+    apt-get install python3 python3-pip git -y && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+ENV NORDVPN_TOKEN=""
+
+RUN git clone https://github.com/Musketears/JARP.git /JARP
+
+WORKDIR /JARP
+
+ENTRYPOINT /etc/init.d/nordvpn start && ls && sleep 5 && nordvpn login --token $NORDVPN_TOKEN && nordvpn connect && pip install -r bot/requirements.txt --break-system-packages && python3 bot/jarp.py
+CMD bash
