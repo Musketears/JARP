@@ -17,5 +17,5 @@ RUN git clone https://github.com/Musketears/JARP.git /JARP
 
 WORKDIR /JARP
 
-ENTRYPOINT /etc/init.d/nordvpn start && ls && sleep 5 && nordvpn login --token $NORDVPN_TOKEN && nordvpn connect && pip install -r bot/requirements.txt --break-system-packages && python3 bot/jarp.py
+ENTRYPOINT git pull && /etc/init.d/nordvpn start && sleep 5 && nordvpn login --token $NORDVPN_TOKEN && nordvpn connect && pip install -r bot/requirements.txt --break-system-packages && python3 bot/jarp.py
 CMD bash
