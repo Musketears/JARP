@@ -18,7 +18,7 @@ class VpnCommand(commands.Cog):
                 await ctx.send(result.stdout if result.stdout else result.stderr)
                 break
             except:
-                tries+=1
+                pass
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(VpnCommand(bot))
