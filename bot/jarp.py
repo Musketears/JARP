@@ -6,7 +6,7 @@ intents = discord.Intents.default()
 intents.message_content = True
 
 async def load_cogs(bot):
-    cog_folders = ['music']
+    cog_folders = ['music', 'vpn']
     for folder in cog_folders:
         for root, _, files in os.walk(os.path.join(os.path.dirname(os.path.abspath(__file__)), "src", folder)):
             for file in files:
