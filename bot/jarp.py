@@ -1,6 +1,6 @@
 import discord, os
 from discord.ext import commands
-from src.other.tokens import TOKEN, SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET
+from src.other.tokens import TOKEN
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -20,7 +20,7 @@ async def load_cogs(bot):
 class MyBot(commands.Bot):
     async def setup_hook(self):
         await load_cogs(self)
-
+        
 if __name__ == "__main__":
     my_bot = MyBot(command_prefix='?', intents=intents)
     my_bot.run(TOKEN)
