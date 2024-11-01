@@ -11,11 +11,11 @@ async def load_cogs(bot):
         for root, _, files in os.walk(os.path.join(os.path.dirname(os.path.abspath(__file__)), "src", folder)):
             for file in files:
                 if '.py' in file and not file == '__init__.py' and not '.pyc' in file:
-                    cog_path = os.path.relpath(os.path.join(root, file)).replace(os.sep, ".").rsplit(".py", 1)[0]
+                    cog_path = os.path.join(root, file).replace(os.path.dirname(os.path.realpath(__file__)) + os.sep,"").replace(os.sep, ".").rsplit(".py", 1)[0]
                     try:
                         await bot.load_extension(cog_path)
-                    except:
-                        pass
+                    except Exception as error:
+                        print(error)
 
 class MyBot(commands.Bot):
     async def setup_hook(self):

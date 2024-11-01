@@ -2,11 +2,12 @@ from discord.ext import commands
 from src.music.sources.spotify import SpotifyAPI
 from src.music.music_player import MusicPlayer
 from youtube_search import YoutubeSearch
+from src.other.tokens import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET
 
 class PlaylistCommand(commands.Cog, MusicPlayer):
-    def __init__(self, bot, spotify_client_id, spotify_client_secret):
+    def __init__(self, bot):
         super().__init__(bot)
-        self.spotify_api = SpotifyAPI(spotify_client_id, spotify_client_secret)
+        self.spotify_api = SpotifyAPI(SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET)
 
     @commands.command(name='playlist', help='Play a Spotify playlist, paste the share link after')
     async def playlist(self, ctx, link):
